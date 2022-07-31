@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import './index.less'
+
 import type CustomTabBar from '../../custom-tab-bar'
 
 export default class Index extends Component {
@@ -9,13 +9,13 @@ export default class Index extends Component {
 
   componentDidShow () {
     const tabbar = Taro.getTabBar<CustomTabBar>(this.pageCtx)
-    tabbar?.setSelected(0)
+    tabbar?.setSelected(1)
   }
 
   render () {
     return (
       <View className='index'>
-        <Text>我是首页！</Text>
+        <Text>我是购物车！</Text>
       </View>
     )
   }
