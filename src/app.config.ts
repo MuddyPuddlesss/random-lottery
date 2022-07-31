@@ -11,24 +11,24 @@ export default defineAppConfig({
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black'
   },
-  tabBar: {
-    custom: true,
-    color: '#000000',
-    selectedColor: '#DC143C',
-    backgroundColor: '#ffffff',
-    list: [
-      {
-        pagePath: 'pages/index/index',
-        text: '首页'
-      },
-      {
-        pagePath: 'pages/records/index',
-        text: '记录'
-      },
-      {
-        pagePath: 'pages/profile/index',
-        text: '我的'
-      }
-    ]
-  }
+  // tabBar: {
+  //   custom: true,
+  //   color: '#000000',
+  //   selectedColor: '#DC143C',
+  //   backgroundColor: '#ffffff',
+  //   list: [
+  //     {
+  //       pagePath: 'pages/index/index',
+  //       text: '首页'
+  //     },
+  //     {
+  //       pagePath: 'pages/records/index',
+  //       text: '记录'
+  //     },
+  //     {
+  //       pagePath: 'pages/profile/index',
+  //       text: '我的'
+  //     }
+  //   ]
+  // }
 })
