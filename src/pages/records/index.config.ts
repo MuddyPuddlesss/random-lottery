@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: '看你就要走运',
+  navigationBarTitleText: '记录',
   "usingComponents": {}
 })
