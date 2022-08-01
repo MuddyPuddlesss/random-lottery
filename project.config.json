@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "random-lottery",
+  "projectname": "random-nums",
   "description": "This is a small program that can randomly generate selection numbers.",
   "appid": "touristappid",
   "setting": {

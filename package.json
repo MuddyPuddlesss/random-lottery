@@ -1,5 +1,5 @@
 {
-  "name": "random-lottery",
+  "name": "random-nums",
   "version": "1.0.0",
   "private": true,
   "description": "This is a small program that can randomly generate selection numbers.",

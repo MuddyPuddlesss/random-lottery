@@ -1,5 +1,5 @@
 const config = {
-  projectName: 'random-lottery',
+  projectName: 'random-nums',
   date: '2022-7-31',
   designWidth: 750,
   deviceRatio: {
