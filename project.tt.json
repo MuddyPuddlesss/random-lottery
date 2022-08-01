@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "./",
-  "projectname": "random-lottery",
+  "projectname": "random-nums",
   "appid": "testAppId",
   "setting": {
     "es6": false,
