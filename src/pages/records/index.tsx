@@ -1,7 +1,7 @@
-import { Component, useState } from 'react'
+import { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { Loading, Divider } from "@taroify/core"
+import { Divider } from "@taroify/core"
 import './index.less'
 
 export default class Index extends Component {
@@ -23,13 +23,34 @@ export default class Index extends Component {
     })
   }
 
+
   render () {
     return (
-      <View>
+      <View className={`wrapper ${ this.state.isLoading ? "wrapper-loading" : null}`}>
         {this.state.isLoading}
         {
           this.state.isLoading
-            ? <Loading size='24px'>加载中...</Loading>
+            ? (
+              <View className='loader'>
+                <View className='loader-inner'>
+                  <View className='loader-line-wrap'>
+                    <View className='loader-line'></View>
+                  </View>
+                  <View className='loader-line-wrap'>
+                    <View className='loader-line'></View>
+                  </View>
+                  <View className='loader-line-wrap'>
+                    <View className='loader-line'></View>
+                  </View>
+                  <View className='loader-line-wrap'>
+                    <View className='loader-line'></View>
+                  </View>
+                  <View className='loader-line-wrap'>
+                    <View className='loader-line'></View>
+                  </View>
+                </View>
+              </View>
+            )
             : 
               (<View className='list'>
                 {
