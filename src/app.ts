@@ -1,9 +1,14 @@
+import Taro from '@tarojs/taro'
 import { Component } from 'react'
 import './app.less'
 
 class App extends Component {
 
-  componentDidMount () {}
+  componentDidMount () {
+    Taro.cloud.init({
+      traceUser: true
+    })
+  }
 
   componentDidShow () {}
 
