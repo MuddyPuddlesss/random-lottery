@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { View, Image, Text } from '@tarojs/components'
-import { Stepper } from '@taroify/core'
+import Taro from '@tarojs/taro'
+import { Stepper, Button } from '@taroify/core'
 import './index.less'
 import homeImg from './../../assets/pointer.jpg'
 
@@ -9,6 +10,16 @@ const bluepool = Array.from(new Array(17).keys()).slice(1); // 区间 1 - 16
 export default class Index extends Component {
   state = {
     showResult: false,
+    openid: null,
+    isSaved: false,
+  }
+
+  async componentDidMount() {
+    const { result } = await Taro.cloud.callFunction({ name: 'login' })
+    
+    this.setState({
+      openid: result?.openid,
+    })
   }
 
   count: number | string = 1
@@ -36,7 +47,8 @@ export default class Index extends Component {
 
   getRandomNumss = () => {
     this.setState({
-      showResult: false
+      showResult: false,
+      isSaved: false,
     })
     const { count } = this
     const randomNumsResult: any[] = []
@@ -48,7 +60,56 @@ export default class Index extends Component {
     this.setState({
       showResult: true
     })
-    console.log(this.randomNumsList)
+  }
+
+  formatTime(timestamp) {
+    //日期
+    var DD = String(timestamp.getDate()).padStart(2, '0'); // 获取日
+    var MM = String(timestamp.getMonth() + 1).padStart(2, '0'); //获取月份，1 月为 0
+    var yyyy = timestamp.getFullYear(); // 获取年
+
+    // 时间
+    const hh =  String(timestamp.getHours()).padStart(2, '0');       //获取当前小时数(0-23)
+    const mm = String(timestamp.getMinutes()).padStart(2, '0');     //获取当前分钟数(0-59)
+    const ss = String(timestamp.getSeconds()).padStart(2, '0');     //获取当前秒数(0-59)
+    return yyyy + '-' + MM + '-' + DD + ' ' + hh + ':' + mm + ':' + ss;
+  }
+
+  saveRecords() {
+    if (this.state.isSaved) {
+      Taro.showToast({
+        title: '请勿重复存档',
+        icon: 'error',
+        duration: 1000
+      })
+      return;
+    }
+    const db = Taro.cloud.database()
+    const { openid } = this.state
+    const now = new Date()
+    db.collection('records').add({
+      data: {
+        date: now.getTime(),
+        dateString: this.formatTime(now),
+        records: this.randomNumsList,
+        openid: openid
+      }
+    }).then(() => {
+      this.setState({
+        isSaved: true
+      })
+      Taro.showToast({
+        title: '存档成功',
+        icon: 'success',
+        duration: 1000
+      })
+    })
+  }
+
+  jumpToRecords() {
+    Taro.navigateTo({
+      url: `/pages/records/index?id=${this.state.openid}`
+    })
   }
 
   render () {
@@ -83,6 +144,8 @@ export default class Index extends Component {
             </View>
           )
         }
+        {this.state.showResult && <Button size='large' variant='text' color='info' onClick={() => this.saveRecords()}>号码存档</Button>}
+        <View className='record-ball' onClick={() => this.jumpToRecords()}>存档记录</View>
       </View>
     )
   }
